@@ -135,12 +135,12 @@ textarea {
   background-color: #F23541;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  transform: scale(1.000000005);
 }
 
 .slider:hover:before {
-  scale: 1.7;
-  transform-origin: 50% 61%;
-  box-shadow: 0 0 0 4px rgba(242, 53, 65, 0.2);
+  transform: scale(1.2) translateX(1px);
+  box-shadow: 0 0 0 5px rgba(242, 53, 65, 0.2);
 }
 
 input:checked + .slider {
@@ -152,15 +152,12 @@ input:checked + .slider::before {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(1rem);
-  -ms-transform: translateX(1rem);
-  transform: translateX(1rem);
+  transform: translateX(1rem) scale(1.000000005);
 }
 
 input:checked + .slider:hover:before {
-  scale: 1.7;
-  transform-origin: 240% 61%;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  transform: scale(1.2) translateX(calc(1rem - 3px));
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .slider.round {
@@ -348,6 +345,17 @@ h1 {
   width: 1px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.28);
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 72.5%;
+  }
+}
+@media (max-width: 1100px) {
+  html {
+    font-size: 42.5%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
