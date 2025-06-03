@@ -36,70 +36,69 @@
             <h1 class="heading-1">Текстовый оценщик</h1>
 
             <div class="uploader">
+                <div class="uploader__error">
+                    <p class="subtitle-3">Неверный формат файла!</p>
+                </div>
+
                 <!-- появляется в состоянии "результат" -->
                 <div class="uploader__header">
-                    <button class="subtitle-1">Новый анализ</button>
+                    <button class="subtitle-1 button2">Новый анализ</button>
                 </div>
 
                 <div class="uploader__input-data">
-                    <textarea type="text" placeholder="Введите или вставьте свой текст и нажмите «Анализировать»"></textarea>
+                    <textarea type="text" class="body-1" id="textInput"
+                        placeholder="Введите или вставьте свой текст и нажмите «Анализировать»"></textarea>
+                    <input type="file" id="fileInput" accept=".txt" />
                     <div class="uploader__box-info">
-                        <img src="" alt="upload">
-                        <p>Загрузите файл .txt</p>
+                        <img src="/assets/Upload.png" alt="upload">
+                        <p class="subtitle-2">Загрузите файл .txt</p>
 
                         <div class="uploader__tooltip">
                             Выберите документ или перетащите его сюда (только <b>.txt</b> формат!)
                         </div>
-
-                        <!-- ТЕСТОВЫЕ ЭЛЕМЕНТЫ ДЛЯ ПРОВЕРКИ ФУНКЦИИ ОТПРАВКИ ФАЙЛОВ -->
-                        <input type="file" id="fileInput" accept=".txt"/>
-                        <button type="submit" onclick="sendFile()">
-                            Send
-                        </button>
-                        <pre id="fileResult"></pre>
-                        
                     </div>
-
-                    <!-- ТЕСТОВЫЕ ЭЛЕМЕНТЫ ДЛЯ ПРОВЕРКИ ФУНКЦИИ ОТПРАВКИ ТЕКСТА -->
-                        <input type="text" id="textInput"/>
-                        <button type="submit" onclick="sendText()">
-                            Send
-                        </button>
-                        <pre id="textResult"></pre>
 
                     <!-- появляется в состоянии "результат" -->
-                    <img src="/assets/copy_black.svg" alt="copy">
+                    <img src="/assets/copy_black.svg" alt="copy" class="uploader__copy">
                 </div>
 
-                <div class="uploader__results">
-                    <div class="uploader__result" id="result-words">
-                        <p>Всего слов</p>
-                        <!-- результат появляется в состоянии "результат" -->
-                        <p>96</p>
-                    </div>
-                    <div class="uploader__result" id="result-sentences">
-                        <p>Всего предложений</p>
-                        <!-- результат появляется в состоянии "результат" -->
-                        <p>3</p>
-                    </div>
-                    <div class="uploader__result" id="result-indexR">
-                        <p>Индекс читаемости</p>
-                        <!-- результат появляется в состоянии "результат" -->
-                        <p>75%</p>
-                    </div>
-                    <div class="uploader__result" id="result-topics">
-                        <p>Основные темы</p>
-                        <!-- результат появляется в состоянии "результат" -->
-                        <div>
-                            <div>Lorem Ipsum1</div>
-                            <div>Lorem Ipsum2</div>
+                <div class="uploader__bottom">
+                    <div class="uploader__results">
+                        <div class="uploader__result" id="result-words">
+                            <p class="result-title">Всего слов</p>
+
+                            <!-- результат появляется в состоянии "результат" -->
+                            <p class="result-text" id="words"></p>
+                        </div>
+                        <div class="uploader__result" id="result-sentences">
+                            <p class="result-title">Всего предложений</p>
+
+                            <!-- результат появляется в состоянии "результат" -->
+                            <p class="result-text" id="sentences"></p>
+                        </div>
+                        <div class="uploader__result" id="result-indexR">
+                            <p class="result-title">Индекс читаемости</p>
+
+                            <!-- результат появляется в состоянии "результат" -->
+                            <p class="result-text" id="index"></p>
+                        </div>
+                        <div class="uploader__div-line"></div>
+                        <div class="uploader__result" id="result-topics">
+                            <p class="result-title">Основные темы</p>
+
+                            <!-- результат появляется в состоянии "результат" -->
+                            <div class="uploader__result-tabs" id="topics">
+                                <!-- <div class="uploader__result-tab">Lorem Ipsum1</div> -->
+                                <!-- <div class="uploader__result-tab">Lorem Ipsum2</div> -->
+                            </div>
                         </div>
                     </div>
-                    <button class="subtitle-1">Анализировать</button>
+                    <button class="subtitle-1 button1" onclick="sendData()">Анализировать</button>
                 </div>
             </div>
+
         </div>
     </main>
 </body>
-<script src="/js/api/script.js"></script>
+<script src="js/api/script.js"></script>
 </html>

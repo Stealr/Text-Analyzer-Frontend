@@ -1,39 +1,47 @@
-async function sendFile () {
-    const fileInput = document.getElementById("fileInput");
-    const result = document.getElementById("fileResult")
-    const file = fileInput.files[0];
-    formData = new FormData()
-
-    formData.append("file", fileInput.files[0], 'text.txt');
-    try {
-        const response = await fetch("http://localhost:8080/api/documents", {
-            method: "POST", 
-            body: formData,
-        });
-        const data = await response.json();
-        result.textContent = JSON.stringify(data)
-    } catch (err) {
-        result.textContent = "Ошибка: " + err.message;
-    }
-} 
-
-async function sendText () {
+async function sendData() {
     const textInput = document.getElementById("textInput");
-    const result = document.getElementById("textResult")
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0]    
+    const words = document.getElementById("words");
+    const sentences = document.getElementById("sentences");
+    const index = document.getElementById("index");
+    const topicContainer = document.getElementById("topics")
+    var data, headers, address;
 
-    console.log(JSON.stringify({text: textInput.value}))
+    if (file) {
+        data = new FormData()
+        address = "http://localhost:8080/api/documents"
+        data.append("file", fileInput.files[0], 'text.txt')
+    } else {
+        headers = {
+                "Content-Type": "application/json"
+            }
+        address = "http://localhost:8080/api/analysis"
+        data = JSON.stringify({text: textInput.value})
+    }
+
+    console.log(data, headers)
 
     try {
-        const response = await fetch("http://localhost:8080/api/analysis", {
+        const response = await fetch(address, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({text: textInput.value}),
+            headers: headers,
+            body: data,
+        })
+        const responseData = await response.json()
+        console.log(responseData)
+        words.textContent = JSON.stringify(responseData.word_count)
+        sentences.textContent = JSON.stringify(responseData.sentence_count)
+        index.textContent = JSON.stringify(responseData.readability_score)
+
+        topicContainer.innerHTML = ""
+        responseData.keywords.forEach(element => {
+            const tab = document.createElement("div")
+            tab.className = "uploader__result-tab"
+            tab.textContent = element
+            topicContainer.appendChild(tab)
         });
-        const data = await response.json();
-        result.textContent = JSON.stringify(data)
     } catch (err) {
-        result.textContent = "Ошибка: " + err.message;
+        console.error(err)
     }
 }
