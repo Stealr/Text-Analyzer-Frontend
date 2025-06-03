@@ -1,0 +1,39 @@
+@use 'variables' as *;
+@use 'global' as *;
+@use 'switch' as *;
+
+$mobile-fields: 40px;
+$max-width-container: (
+    1390px - $mobile-fields
+);
+
+@mixin container {
+    margin: 0 auto;
+    padding: 0 $mobile-fields;
+    max-width: $max-width-container;
+}
+
+.header {
+    border-bottom: 1px solid $border-light;
+
+    &__container {
+        @include container;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5.8rem;
+    }
+
+    &__theme {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.main {
+    &__container {
+        @include container;
+    }
+}
