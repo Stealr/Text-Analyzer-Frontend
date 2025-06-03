@@ -268,3 +268,15 @@ h1 {
         background-color: var(--border-color);
     }
 }
+
+@media (min-width: 1600px) {
+    html {
+        font-size: 72.5%;
+    }
+}
+
+@media (max-width: 1100px) {
+    html {
+        font-size: 42.5%;
+    }
+}

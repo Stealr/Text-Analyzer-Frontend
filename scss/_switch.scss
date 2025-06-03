@@ -35,12 +35,13 @@
     background-color: $red-button;
     -webkit-transition: .4s;
     transition: .4s;
+    transform: scale(1.000000005);
 }
 
 .slider:hover:before {
-    scale: 1.7;
-    transform-origin: 50% 61%;
-    box-shadow: 0 0 0 4px rgb($red-button, 0.2);
+    transform: scale(1.2) translateX(1px);
+    // transform-origin: 50% 61%;
+    box-shadow: 0 0 0 5px rgb($red-button, 0.2);
 }
 
 input:checked+.slider {
@@ -52,15 +53,13 @@ input:checked+.slider::before {
 }
 
 input:checked+.slider:before {
-    -webkit-transform: translateX(1rem);
-    -ms-transform: translateX(1rem);
-    transform: translateX(1rem);
+    transform: translateX(1rem) scale(1.000000005);
 }
 
 input:checked+.slider:hover:before {
-    scale: 1.7;
-    transform-origin: 240% 61%;
-    box-shadow: 0 0 0 4px rgb($text-field-light, 0.2);
+    transform: scale(1.2) translateX(calc(1rem - 3px));
+    // transform-origin: 240% 61%;
+    box-shadow: 0 0 0 5px rgb($text-field-light, 0.2);
 }
 
 .slider.round {
