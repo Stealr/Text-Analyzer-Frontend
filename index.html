@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body class="dark-theme">
+<body>
     <header class="header">
         <div class="header__container">
             <div class="header__logo">
@@ -31,8 +31,8 @@
                         fill="#EBEBEB" />
                 </svg>
                 <p class="header__theme-text">Светлая тема</p>
-                <label class="switch">
-                    <input type="checkbox">
+                <label class="switch" >
+                    <input type="checkbox" id="switcherTheme">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -116,6 +116,8 @@
 
         </div>
     </main>
+
+    <script type="module" src="./js/utils/theme.js"></script>
 </body>
 
 </html>
