@@ -11,12 +11,10 @@ if (savedTheme === 'dark') {
 
 themeSwitch.addEventListener('change', function () {
     if (themeSwitch.checked) {
-        console.log('add')
         body.classList.add('dark-theme');
         localStorage.setItem('theme', 'dark');
         themeText.textContent = 'Темная тема';
     } else {
-        console.log('remove')
         body.classList.remove('dark-theme');
         localStorage.setItem('theme', 'light');
         themeText.textContent = 'Светлая тема';

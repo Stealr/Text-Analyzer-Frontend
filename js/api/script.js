@@ -1,11 +1,10 @@
-async function sendData() {
+export default async function sendData(file, showError) {
     const textInput = document.getElementById("textInput");
     const fileInput = document.getElementById("fileInput");
-    const file = fileInput.files[0]    
-    const words = document.getElementById("words");
-    const sentences = document.getElementById("sentences");
-    const index = document.getElementById("index");
-    const topicContainer = document.getElementById("topics")
+    const words = document.getElementById("result-words");
+    const sentences = document.getElementById("result-sentences");
+    const index = document.getElementById("result-indexR");
+    const topicContainer = document.getElementById("result-topics")
     var data, headers, address;
 
     if (file) {
@@ -14,10 +13,10 @@ async function sendData() {
         data.append("file", fileInput.files[0], 'text.txt')
     } else {
         headers = {
-                "Content-Type": "application/json"
-            }
+            "Content-Type": "application/json"
+        }
         address = "http://localhost:8080/api/analysis"
-        data = JSON.stringify({text: textInput.value})
+        data = JSON.stringify({ text: textInput.value })
     }
 
     console.log(data, headers)
@@ -28,6 +27,11 @@ async function sendData() {
             headers: headers,
             body: data,
         })
+        
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
+        }
+
         const responseData = await response.json()
         console.log(responseData)
         words.textContent = JSON.stringify(responseData.word_count)
@@ -43,5 +47,9 @@ async function sendData() {
         });
     } catch (err) {
         console.error(err)
+        if (showError) {
+            showError('Ошибка при выполнении запроса: ' + err.message);
+        }
+        throw err; // Пробрасываем ошибку дальше
     }
 }

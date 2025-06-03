@@ -40,8 +40,12 @@ body {
 .body-1 {
   font-size: 1.6rem;
   font-weight: 400;
-  line-height: 1.6rem;
+  line-height: 2rem;
   color: #000;
+}
+
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 textarea::placeholder {
@@ -305,6 +309,19 @@ h1 {
   visibility: hidden;
   transition: opacity 3s ease;
 }
+.uploader__error.active {
+  animation: fade-out 9s ease;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 .uploader__header {
   display: none;
   justify-content: end;
@@ -343,6 +360,7 @@ h1 {
   display: none;
 }
 .uploader__copy {
+  display: none;
   position: absolute;
   right: 1.7rem;
   bottom: 1.2rem;
@@ -437,6 +455,48 @@ h1 {
   background-color: var(--border-color);
 }
 
+.uploader.results .uploader__header {
+  display: flex;
+}
+.uploader.results .uploader__copy {
+  display: block;
+}
+.uploader.results #startBtn {
+  display: none;
+}
+.uploader.results .uploader__box-info {
+  display: none;
+}
+
+#startBtn span {
+  display: inline;
+}
+#startBtn .loader {
+  display: none;
+  animation: rotation 1s linear infinite;
+}
+
+#startBtn.loading {
+  background-color: #DBDCDD;
+  width: 14.7rem;
+  height: 5.2rem;
+  padding: 0;
+}
+#startBtn.loading span {
+  display: none;
+}
+#startBtn.loading .loader {
+  display: inline;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @media (min-width: 1600px) {
   html {
     font-size: 72.5%;
