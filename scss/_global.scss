@@ -5,6 +5,10 @@ html {
     font-size: $global-scale;
 }
 
+:root {
+    --border-color: #{$border-light};
+}
+
 body {
     font-size: 1.6rem;
 }
@@ -28,6 +32,7 @@ body {
     color: $transparency-main-text-light;
 }
 
+// Не используется
 .subtitle-3 {
     font-size: $subtitle-3;
     font-weight: $subtitle-3-weight;
@@ -39,6 +44,7 @@ body {
     font-size: $body-1;
     font-weight: $body-1-weight;
     line-height: $body-1-line-height;
+    color: $black-text;
 }
 
 textarea::placeholder {
