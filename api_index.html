@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analyzer</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <img src="./assets/logo/logo_light.png" alt="logo">
+            </div>
+            <div class="header__theme">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.36364 2.54545V0H7.63636V2.54545H6.36364ZM10.5955 4.29545L9.72045 3.42045L11.5023 1.59091L12.3932 2.49773L10.5955 4.29545ZM11.4545 7.63636V6.36364H14V7.63636H11.4545ZM6.36364 14V11.4545H7.63636V14H6.36364ZM3.40455 4.26364L1.59091 2.49773L2.49773 1.60682L4.29545 3.40455L3.40455 4.26364ZM11.4864 12.4091L9.72045 10.5795L10.5795 9.72045L12.3932 11.4705L11.4864 12.4091ZM0 7.63636V6.36364H2.54545V7.63636H0ZM2.49773 12.4091L1.60682 11.5023L3.38864 9.72045L3.85 10.15L4.31136 10.5955L2.49773 12.4091ZM7 10.8182C5.93939 10.8182 5.03788 10.447 4.29545 9.70455C3.55303 8.96212 3.18182 8.06061 3.18182 7C3.18182 5.93939 3.55303 5.03788 4.29545 4.29545C5.03788 3.55303 5.93939 3.18182 7 3.18182C8.06061 3.18182 8.96212 3.55303 9.70455 4.29545C10.447 5.03788 10.8182 5.93939 10.8182 7C10.8182 8.06061 10.447 8.96212 9.70455 9.70455C8.96212 10.447 8.06061 10.8182 7 10.8182ZM7 9.54545C7.7 9.54545 8.29924 9.29621 8.79773 8.79773C9.29621 8.29924 9.54545 7.7 9.54545 7C9.54545 6.3 9.29621 5.70076 8.79773 5.20227C8.29924 4.70379 7.7 4.45455 7 4.45455C6.3 4.45455 5.70076 4.70379 5.20227 5.20227C4.70379 5.70076 4.45455 6.3 4.45455 7C4.45455 7.7 4.70379 8.29924 5.20227 8.79773C5.70076 9.29621 6.3 9.54545 7 9.54545Z"
+                        fill="#F23541" />
+                </svg>
+                <p>Светлая тема</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="main__container">
+            <h1 class="heading-1">Текстовый оценщик</h1>
+
+            <div class="uploader">
+                <!-- появляется в состоянии "результат" -->
+                <div class="uploader__header">
+                    <button class="subtitle-1">Новый анализ</button>
+                </div>
+
+                <div class="uploader__input-data">
+                    <textarea type="text" placeholder="Введите или вставьте свой текст и нажмите «Анализировать»"></textarea>
+                    <div class="uploader__box-info">
+                        <img src="" alt="upload">
+                        <p>Загрузите файл .txt</p>
+
+                        <div class="uploader__tooltip">
+                            Выберите документ или перетащите его сюда (только <b>.txt</b> формат!)
+                        </div>
+
+                        <!-- ТЕСТОВЫЕ ЭЛЕМЕНТЫ ДЛЯ ПРОВЕРКИ ФУНКЦИИ ОТПРАВКИ ФАЙЛОВ -->
+                        <input type="file" id="fileInput" accept=".txt"/>
+                        <button type="submit" onclick="sendFile()">
+                            Send
+                        </button>
+                        <pre id="fileResult"></pre>
+                        
+                    </div>
+
+                    <!-- ТЕСТОВЫЕ ЭЛЕМЕНТЫ ДЛЯ ПРОВЕРКИ ФУНКЦИИ ОТПРАВКИ ТЕКСТА -->
+                        <input type="text" id="textInput"/>
+                        <button type="submit" onclick="sendText()">
+                            Send
+                        </button>
+                        <pre id="textResult"></pre>
+
+                    <!-- появляется в состоянии "результат" -->
+                    <img src="/assets/copy_black.svg" alt="copy">
+                </div>
+
+                <div class="uploader__results">
+                    <div class="uploader__result" id="result-words">
+                        <p>Всего слов</p>
+                        <!-- результат появляется в состоянии "результат" -->
+                        <p>96</p>
+                    </div>
+                    <div class="uploader__result" id="result-sentences">
+                        <p>Всего предложений</p>
+                        <!-- результат появляется в состоянии "результат" -->
+                        <p>3</p>
+                    </div>
+                    <div class="uploader__result" id="result-indexR">
+                        <p>Индекс читаемости</p>
+                        <!-- результат появляется в состоянии "результат" -->
+                        <p>75%</p>
+                    </div>
+                    <div class="uploader__result" id="result-topics">
+                        <p>Основные темы</p>
+                        <!-- результат появляется в состоянии "результат" -->
+                        <div>
+                            <div>Lorem Ipsum1</div>
+                            <div>Lorem Ipsum2</div>
+                        </div>
+                    </div>
+                    <button class="subtitle-1">Анализировать</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="/js/api/script.js"></script>
+</html>
