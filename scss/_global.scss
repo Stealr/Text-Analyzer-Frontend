@@ -51,6 +51,10 @@ textarea::placeholder {
     color: $transparency-main-text-light;
 }
 
+textarea::placeholder {
+    color: $transparency-main-text-light;
+}
+
 .caption {
     font-size: $caption;
     font-weight: $caption-weight;
