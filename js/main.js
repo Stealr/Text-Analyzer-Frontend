@@ -39,6 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
         selectFile.style.display = textarea.value.length > 0 ? 'none' : 'flex';
     }
 
+    function loadFile(file) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const text = reader.result;
+            textarea.value = text;
+            return text;
+        };
+        reader.readAsText(file);
+    }
+
     // Функция для обработки файла
     async function handleFile(file) {
         if (!file) return;
@@ -48,11 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        
+
         startBtn.classList.add('loading');
 
         try {
             await sendData(file, showError);
             startBtn.classList.remove('loading');
+            textarea.value = await loadFile(file);
             toggleState();
         } catch (err) {
             showError('Ошибка при отправке файла: ' + err.message);
@@ -87,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dt = new DataTransfer();
             dt.items.add(file);
             fileInput.files = dt.files;
-            
+
             // Обрабатываем файл
             handleFile(file);
         }
