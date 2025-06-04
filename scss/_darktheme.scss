@@ -2,6 +2,7 @@
 
 .dark-theme {
     --border-color: #{$border-dark};
+    --dnd: #{$dnd-dark};
 }
 
 // Глобальные стили
@@ -82,6 +83,14 @@ body.dark-theme {
             .dark {
                 display: block;
             }
+        }
+    }
+
+    .uploader.loadingFile {
+        background-color: var(--dnd);
+
+        textarea {
+            background-color: var(--dnd);
         }
     }
 }

@@ -285,6 +285,14 @@ h1 {
     }
 }
 
+#textUploadFile {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+}
+
 .uploader.results {
     .uploader__header {
         display: flex;
@@ -300,6 +308,23 @@ h1 {
 
     .uploader__box-info {
         display: none;
+    }
+}
+
+.uploader.loadingFile,
+.uploader.drag-over {
+    background-color: var(--dnd);
+
+    textarea {
+        background-color: var(--dnd) !important;
+    }
+
+    #selectFile {
+        display: none !important;
+    }
+
+    #textUploadFile {
+        display: block !important;
     }
 }
 

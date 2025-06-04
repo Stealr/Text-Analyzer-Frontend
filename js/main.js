@@ -8,11 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const startBtn = document.getElementById('startBtn');
     const newBtn = document.getElementById('newBtn');
+    const newBtn2 = document.getElementById('newBtn2');
     const copyBtn = document.getElementById('copyBtn');
 
     const errorMessage = document.getElementById('error-message');
     const uploader = document.getElementById('uploader');
     const dndArea = document.getElementById('dndArea');
+    const textUploadFile = document.getElementById('textUploadFile');
 
     let errorTimeout;
 
@@ -49,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsText(file);
     }
 
-    // Функция для обработки файла
     async function handleFile(file) {
         if (!file) return;
 
@@ -58,25 +59,39 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        
+        const maxSize = 1 * 1024 * 1024;
+        if (file.size > maxSize) {
+            showError('Максимальный размер 1мб');
+            return;
+        }
 
+        textarea.value = ' '
+        uploader.classList.add('loadingFile');
         startBtn.classList.add('loading');
 
         try {
             await sendData(file, showError);
             startBtn.classList.remove('loading');
+            uploader.classList.remove('loadingFile');
             textarea.value = await loadFile(file);
             toggleState();
         } catch (err) {
-            showError('Ошибка при отправке файла: ' + err.message);
+            if (err) {
+                showError(err.message);
+            }
             startBtn.classList.remove('loading');
+            uploader.classList.remove('loadingFile');
         }
     }
 
-    // Drag and Drop функциональность
     dndArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        if (uploader.classList.contains('results')) return
+
+        uploader.classList.add('drag-over');
+        textarea.value = ' '
     });
 
     dndArea.addEventListener('dragenter', (e) => {
@@ -87,21 +102,30 @@ document.addEventListener('DOMContentLoaded', () => {
     dndArea.addEventListener('dragleave', (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        if (uploader.classList.contains('results')) return
+
+        uploader.classList.remove('drag-over');
+        textarea.value = ''
     });
 
     dndArea.addEventListener('drop', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
+        if (uploader.classList.contains('results')) return
+
+        uploader.classList.remove('drag-over');
+        selectFile.style.display = 'flex'
+        textUploadFile.style.display = 'none'
+
         const files = e.dataTransfer.files;
         if (files.length > 0) {
             const file = files[0];
-            // Назначаем файл в input
             const dt = new DataTransfer();
             dt.items.add(file);
             fileInput.files = dt.files;
 
-            // Обрабатываем файл
             handleFile(file);
         }
     });
@@ -138,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    newBtn.addEventListener('click', () => {
+    newBtn2.addEventListener('click', () => {
         textarea.value = '';
         fileInput.value = '';
         clearResults();

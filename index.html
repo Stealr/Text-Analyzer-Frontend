@@ -50,13 +50,15 @@
 
                 <!-- появляется в состоянии "результат" -->
                 <div class="uploader__header" id="newBtn">
-                    <button class="subtitle-1 button2">Новый анализ</button>
+                    <button class="subtitle-1 button2" id="newBtn2">Новый анализ</button>
                 </div>
 
                 <div class="uploader__input-data" id="dndArea">
                     <textarea type="text" class="body-1" id="textInput"
                         placeholder="Введите или вставьте свой текст и нажмите «Анализировать»"></textarea>
                     <input type="file" id="fileInput">
+
+                    <p class="subtitle-2" id="textUploadFile" style="display: none; pointer-events: none;">Загрузите файл .txt</p>
                     <div class="uploader__box-info" id="selectFile">
                         <img src="/assets/Upload_light.svg" alt="upload" class="light">
                         <img src="/assets/Upload_dark.svg" alt="upload" class="dark">
@@ -67,7 +69,6 @@
                         </div>
                     </div>
 
-                    <!-- появляется в состоянии "результат" -->
                     <svg class="uploader__copy" id="copyBtn" width="23" height="24" viewBox="0 0 23 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -98,8 +99,6 @@
                         <div class="uploader__result">
                             <p class="result-title">Основные темы</p>
                             <div class="uploader__result-tabs" id="result-topics">
-                                <!-- <div class="uploader__result-tab">Lorem Ipsum1</div>
-                                <div class="uploader__result-tab">Lorem Ipsum2</div> -->
                             </div>
                         </div>
                     </div>

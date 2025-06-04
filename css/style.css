@@ -5,6 +5,7 @@ html {
 
 :root {
   --border-color: rgba(0, 0, 0, 0.28);
+  --dnd: #F2F2F2;
 }
 
 body {
@@ -179,6 +180,7 @@ input:checked + .slider:hover:before {
 
 .dark-theme {
   --border-color: rgba(255, 255, 255, 0.2);
+  --dnd: #585858;
 }
 
 body.dark-theme .heading-1 {
@@ -232,6 +234,12 @@ body.dark-theme .uploader__box-info .light {
 }
 body.dark-theme .uploader__box-info .dark {
   display: block;
+}
+body.dark-theme .uploader.loadingFile {
+  background-color: var(--dnd);
+}
+body.dark-theme .uploader.loadingFile textarea {
+  background-color: var(--dnd);
 }
 
 body {
@@ -455,6 +463,14 @@ h1 {
   background-color: var(--border-color);
 }
 
+#textUploadFile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+}
+
 .uploader.results .uploader__header {
   display: flex;
 }
@@ -466,6 +482,23 @@ h1 {
 }
 .uploader.results .uploader__box-info {
   display: none;
+}
+
+.uploader.loadingFile,
+.uploader.drag-over {
+  background-color: var(--dnd);
+}
+.uploader.loadingFile textarea,
+.uploader.drag-over textarea {
+  background-color: var(--dnd) !important;
+}
+.uploader.loadingFile #selectFile,
+.uploader.drag-over #selectFile {
+  display: none !important;
+}
+.uploader.loadingFile #textUploadFile,
+.uploader.drag-over #textUploadFile {
+  display: block !important;
 }
 
 #startBtn span {

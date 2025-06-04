@@ -19,37 +19,34 @@ export default async function sendData(file, showError) {
         data = JSON.stringify({ text: textInput.value })
     }
 
-    console.log(data, headers)
-
     try {
         const response = await fetch(address, {
             method: "POST",
             headers: headers,
             body: data,
         })
-        
+
         if (!response.ok) {
-            throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
+            switch (response.status) {
+                case 413:
+                    showError("Файл не должен превышать 1мб");
+                    break;
+            }
+            throw err;
         }
+            const responseData = await response.json()
+            words.textContent = JSON.stringify(responseData.word_count)
+            sentences.textContent = JSON.stringify(responseData.sentence_count)
+            index.textContent = JSON.stringify(responseData.readability_score)
 
-        const responseData = await response.json()
-        console.log(responseData)
-        words.textContent = JSON.stringify(responseData.word_count)
-        sentences.textContent = JSON.stringify(responseData.sentence_count)
-        index.textContent = JSON.stringify(responseData.readability_score)
-
-        topicContainer.innerHTML = ""
-        responseData.keywords.forEach(element => {
-            const tab = document.createElement("div")
-            tab.className = "uploader__result-tab"
-            tab.textContent = element
-            topicContainer.appendChild(tab)
-        });
+            topicContainer.innerHTML = ""
+            responseData.keywords.forEach(element => {
+                const tab = document.createElement("div")
+                tab.className = "uploader__result-tab"
+                tab.textContent = element
+                topicContainer.appendChild(tab)
+            });
     } catch (err) {
-        console.error(err)
-        if (showError) {
-            showError('Ошибка при выполнении запроса: ' + err.message);
-        }
-        throw err; // Пробрасываем ошибку дальше
+        throw err;
     }
 }
